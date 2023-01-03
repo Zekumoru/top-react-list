@@ -11,6 +11,7 @@ class OverviewItem extends React.Component {
 
     this.handleEditClicked = this.handleEditClicked.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleInputKeyDown = this.handleInputKeyDown.bind(this);
   }
 
   handleEditClicked() {
@@ -20,6 +21,11 @@ class OverviewItem extends React.Component {
       },
       () => {
         if (this.state.editMode) return;
+        if (this.state.item.task === '') {
+          this.setState({ item: this.props.item });
+          return;
+        }
+
         this.props.onEditedTask(this.state.item);
       }
     );
@@ -29,6 +35,11 @@ class OverviewItem extends React.Component {
     this.setState({
       item: { ...this.state.item, task: e.target.value },
     });
+  }
+
+  handleInputKeyDown(e) {
+    if (e.key !== 'Enter') return;
+    this.handleEditClicked();
   }
 
   render() {
@@ -42,6 +53,8 @@ class OverviewItem extends React.Component {
         placeholder="Edit task..."
         value={item.task}
         onChange={this.handleInputChange}
+        onKeyDown={this.handleInputKeyDown}
+        autoFocus
       />
     ) : (
       <span className="text">{item.task}</span>
