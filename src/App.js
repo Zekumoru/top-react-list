@@ -13,6 +13,7 @@ class App extends React.Component {
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleAddTaskClicked = this.handleAddTaskClicked.bind(this);
+    this.handleDeleteTask = this.handleDeleteTask.bind(this);
   }
 
   handleInputChange(value) {
@@ -26,6 +27,13 @@ class App extends React.Component {
     });
   }
 
+  handleDeleteTask(id) {
+    const taskIndex = this.state.tasks.findIndex((task) => task.id === id);
+    this.setState({
+      tasks: this.state.tasks.filter((task, index) => taskIndex !== index),
+    });
+  }
+
   render() {
     return (
       <div className="App">
@@ -34,7 +42,10 @@ class App extends React.Component {
           onInputChange={this.handleInputChange}
           onAddTaskClicked={this.handleAddTaskClicked}
         />
-        <Overview items={this.state.tasks} />
+        <Overview
+          items={this.state.tasks}
+          onDeleteTask={this.handleDeleteTask}
+        />
       </div>
     );
   }
