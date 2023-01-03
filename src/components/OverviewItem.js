@@ -8,10 +8,13 @@ class OverviewItem extends React.Component {
       <li className="OverviewItem">
         <span className="number">{number}.</span>
         <span className="text">{item.task}</span>
-        <i
-          className="fa-solid fa-trash"
-          onClick={() => onDeleteTask(item.id)}
-        />
+        <span className="buttons">
+          <i className="fa-solid fa-pen-to-square" />
+          <i
+            className="fa-solid fa-trash"
+            onClick={() => onDeleteTask(item.id)}
+          />
+        </span>
       </li>
     );
   }

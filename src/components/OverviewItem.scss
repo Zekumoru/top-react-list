@@ -5,8 +5,13 @@
     margin-right: 4px;
   }
 
-  i {
+  .buttons {
+    display: flex;
+    gap: 4px;
     margin-left: auto;
+  }
+
+  i {
     cursor: pointer;
   }
 }
