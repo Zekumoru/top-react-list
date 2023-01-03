@@ -2,6 +2,7 @@ import { nanoid } from 'nanoid';
 import React from 'react';
 import InputBar from './components/InputBar';
 import Overview from './components/Overview';
+import './App.scss';
 
 class App extends React.Component {
   constructor(props) {

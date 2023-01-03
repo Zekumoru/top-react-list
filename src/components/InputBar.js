@@ -1,4 +1,5 @@
 import React from 'react';
+import './InputBar.scss';
 
 class InputBar extends React.Component {
   constructor(props) {
