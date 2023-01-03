@@ -7,13 +7,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       input: '',
-      tasks: [
-        { id: 0, task: 'Wash dishes' },
-        { id: 1, task: 'Hang clothes' },
-        { id: 2, task: 'Study bible' },
-        { id: 3, task: 'Take bath' },
-        { id: 4, task: 'Exercise for 10 minutes' },
-      ],
+      tasks: [],
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -24,7 +18,15 @@ class App extends React.Component {
     this.setState({ input: value });
   }
 
-  handleAddTaskClicked() {}
+  handleAddTaskClicked() {
+    this.setState({
+      input: '',
+      tasks: [
+        ...this.state.tasks,
+        { id: this.state.tasks.length, task: this.state.input },
+      ],
+    });
+  }
 
   render() {
     return (

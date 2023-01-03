@@ -5,13 +5,23 @@ class InputBar extends React.Component {
     super(props);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleAddTaskClicked = this.handleAddTaskClicked.bind(this);
+    this.handleInputKeyDown = this.handleInputKeyDown.bind(this);
   }
 
   handleInputChange(e) {
     this.props.onInputChange(e.target.value);
   }
 
-  handleAddTaskClicked() {}
+  handleInputKeyDown(e) {
+    if (e.target.value === '') return;
+    if (e.key !== 'Enter') return;
+
+    this.handleAddTaskClicked();
+  }
+
+  handleAddTaskClicked() {
+    this.props.onAddTaskClicked();
+  }
 
   render() {
     const { value } = this.props;
@@ -22,8 +32,9 @@ class InputBar extends React.Component {
           placeholder="Write task..."
           value={value}
           onChange={this.handleInputChange}
+          onKeyDown={this.handleInputKeyDown}
         />
-        <button>Add task</button>
+        <button onClick={this.handleAddTaskClicked}>Add task</button>
       </div>
     );
   }
