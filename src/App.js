@@ -10,10 +10,11 @@ class App extends React.Component {
       input: '',
       tasks: [],
     };
-
+    window.seeState = () => console.dir(this.state);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleAddTaskClicked = this.handleAddTaskClicked.bind(this);
     this.handleDeleteTask = this.handleDeleteTask.bind(this);
+    this.handleEditedTask = this.handleEditedTask.bind(this);
   }
 
   handleInputChange(value) {
@@ -34,6 +35,20 @@ class App extends React.Component {
     });
   }
 
+  handleEditedTask(editedTask) {
+    this.setState({
+      tasks: this.state.tasks.reduce((tasks, task) => {
+        if (task.id === editedTask.id) {
+          tasks.push(editedTask);
+          return tasks;
+        }
+
+        tasks.push(task);
+        return tasks;
+      }, []),
+    });
+  }
+
   render() {
     return (
       <div className="App">
@@ -44,6 +59,7 @@ class App extends React.Component {
         />
         <Overview
           items={this.state.tasks}
+          onEditedTask={this.handleEditedTask}
           onDeleteTask={this.handleDeleteTask}
         />
       </div>

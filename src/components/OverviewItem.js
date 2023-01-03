@@ -2,14 +2,66 @@ import React from 'react';
 import './OverviewItem.scss';
 
 class OverviewItem extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      item: props.item,
+      editMode: false,
+    };
+
+    this.handleEditClicked = this.handleEditClicked.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
+  handleEditClicked() {
+    this.setState(
+      {
+        editMode: !this.state.editMode,
+      },
+      () => {
+        if (this.state.editMode) return;
+        this.props.onEditedTask(this.state.item);
+      }
+    );
+  }
+
+  handleInputChange(e) {
+    this.setState({
+      item: { ...this.state.item, task: e.target.value },
+    });
+  }
+
   render() {
-    const { number, item, onDeleteTask } = this.props;
+    const { number, onDeleteTask } = this.props;
+    const { item, editMode } = this.state;
+
+    const text = editMode ? (
+      <input
+        type="text"
+        className="input"
+        placeholder="Edit task..."
+        value={item.task}
+        onChange={this.handleInputChange}
+      />
+    ) : (
+      <span className="text">{item.task}</span>
+    );
+
+    const editIcon = editMode ? (
+      <i className="fa-solid fa-check" onClick={this.handleEditClicked} />
+    ) : (
+      <i
+        className="fa-solid fa-pen-to-square"
+        onClick={this.handleEditClicked}
+      />
+    );
+
     return (
       <li className="OverviewItem">
         <span className="number">{number}.</span>
-        <span className="text">{item.task}</span>
+        {text}
         <span className="buttons">
-          <i className="fa-solid fa-pen-to-square" />
+          {editIcon}
           <i
             className="fa-solid fa-trash"
             onClick={() => onDeleteTask(item.id)}
