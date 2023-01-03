@@ -10,7 +10,7 @@ class App extends React.Component {
       input: '',
       tasks: [],
     };
-    window.seeState = () => console.dir(this.state);
+
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleAddTaskClicked = this.handleAddTaskClicked.bind(this);
     this.handleDeleteTask = this.handleDeleteTask.bind(this);
