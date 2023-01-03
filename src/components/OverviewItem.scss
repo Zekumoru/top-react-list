@@ -1,0 +1,12 @@
+.OverviewItem {
+  display: flex;
+
+  .number {
+    margin-right: 4px;
+  }
+
+  i {
+    margin-left: auto;
+    cursor: pointer;
+  }
+}
