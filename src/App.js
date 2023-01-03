@@ -1,3 +1,4 @@
+import { nanoid } from 'nanoid';
 import React from 'react';
 import InputBar from './components/InputBar';
 import Overview from './components/Overview';
@@ -21,10 +22,7 @@ class App extends React.Component {
   handleAddTaskClicked() {
     this.setState({
       input: '',
-      tasks: [
-        ...this.state.tasks,
-        { id: this.state.tasks.length, task: this.state.input },
-      ],
+      tasks: [...this.state.tasks, { id: nanoid(), task: this.state.input }],
     });
   }
 
